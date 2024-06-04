@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -39,8 +41,10 @@ public class User {
     private boolean isActive = true;
 
     @Column(updatable = false, name = "created_at")
-    private LocalDateTime createAt = LocalDateTime.now();
+    @CreationTimestamp
+    private LocalDateTime createAt;
 
     @Column(name = "updated_at")
-    private LocalDateTime updateAt = LocalDateTime.now();
+    @UpdateTimestamp
+    private LocalDateTime updateAt;
 }

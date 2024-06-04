@@ -3,6 +3,8 @@ package com.subscriptionmanager.entity;
 import com.subscriptionmanager.validator.constraint.ValidEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -43,8 +45,10 @@ public class Subscription {
     private boolean isActive = true;
 
     @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt = LocalDateTime.now();
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 }

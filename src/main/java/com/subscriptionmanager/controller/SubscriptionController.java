@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("subscription")
+@RequestMapping("subscriptions")
 public class SubscriptionController {
 
     @Autowired
@@ -38,9 +38,7 @@ public class SubscriptionController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Subscription> update(
-            @PathVariable Long id,
-            @RequestBody SubscriptionDTO subscriptionDTO) {
+    public ResponseEntity<Subscription> update(@PathVariable Long id, @RequestBody SubscriptionDTO subscriptionDTO) {
         return ResponseEntity.ok(subscriptionService.update(id, subscriptionDTO));
     }
 
