@@ -3,6 +3,8 @@ package com.subscriptionmanager.controller;
 import com.subscriptionmanager.dto.SubscriptionDTO;
 import com.subscriptionmanager.entity.Subscription;
 import com.subscriptionmanager.service.SubscriptionService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +15,8 @@ import java.util.List;
 @RequestMapping("subscription")
 public class SubscriptionController {
 
-    private final SubscriptionService subscriptionService;
+    @Autowired
+    private SubscriptionService subscriptionService;
 
     public SubscriptionController(SubscriptionService subscriptionService) {
         this.subscriptionService = subscriptionService;
@@ -30,14 +33,14 @@ public class SubscriptionController {
     }
 
     @PostMapping
-    public ResponseEntity<Subscription> create(@Validated @RequestBody SubscriptionDTO subscriptionDTO) {
+    public ResponseEntity<Subscription> create(@RequestBody SubscriptionDTO subscriptionDTO) {
         return ResponseEntity.ok(subscriptionService.create(subscriptionDTO));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Subscription> update(
             @PathVariable Long id,
-            @Validated @RequestBody SubscriptionDTO subscriptionDTO) {
+            @RequestBody SubscriptionDTO subscriptionDTO) {
         return ResponseEntity.ok(subscriptionService.update(id, subscriptionDTO));
     }
 

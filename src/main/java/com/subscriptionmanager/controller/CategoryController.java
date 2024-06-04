@@ -4,6 +4,7 @@ import com.subscriptionmanager.dto.CategoryDTO;
 import com.subscriptionmanager.entity.Category;
 import com.subscriptionmanager.service.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,8 @@ import java.util.List;
 @RequestMapping("categories")
 @RequiredArgsConstructor
 public class CategoryController {
-    private final CategoryService categoryService;
+    @Autowired
+    private CategoryService categoryService;
 
     @PostMapping
     public ResponseEntity<Category> create(@RequestBody CategoryDTO categoryDTO) {
