@@ -2,6 +2,7 @@ package com.subscriptionmanager.entity;
 
 import com.subscriptionmanager.validator.constraint.ValidEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.FutureOrPresent;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -29,6 +30,7 @@ public class Subscription {
     private String serviceName;
 
     @Column(name = "next_payment_date", nullable = false)
+    @FutureOrPresent(message = "Next payment date must be present or in the future")
     private LocalDateTime nextPaymentDate;
 
     @Column(name = "amount", nullable = false)
