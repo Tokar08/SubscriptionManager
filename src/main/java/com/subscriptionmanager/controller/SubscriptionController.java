@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("subscriptions")
@@ -46,5 +47,10 @@ public class SubscriptionController {
     public ResponseEntity<?> delete(@PathVariable Long id) {
         subscriptionService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/total-amounts")
+    public List<Map<String, Object>> getTotalAmountsByServiceName() {
+        return subscriptionService.getTotalAmountByServiceName();
     }
 }

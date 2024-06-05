@@ -22,4 +22,7 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Long
 
     @Query("SELECT s FROM Subscription s WHERE s.category.categoryId = :categoryId AND s.isActive = true")
     List<Subscription> findActiveByCategoryId(Long categoryId);
+
+    @Query("SELECT s.serviceName, SUM(s.amount) FROM Subscription s WHERE s.isActive = true GROUP BY s.serviceName")
+    List<Object[]> findTotalAmountByServiceName();
 }

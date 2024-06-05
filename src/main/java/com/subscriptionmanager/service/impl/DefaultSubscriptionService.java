@@ -13,6 +13,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class DefaultSubscriptionService implements SubscriptionService {
@@ -86,5 +89,16 @@ public class DefaultSubscriptionService implements SubscriptionService {
     public Subscription getById(Long subscriptionId) {
         return subscriptionRepository.findActiveById(subscriptionId)
                 .orElseThrow(() -> new EntityNotFoundException("Subscription", "id", subscriptionId));
+    }
+    @Override
+    public List<Map<String, Object>> getTotalAmountByServiceName() {
+        List<Object[]> results = subscriptionRepository.findTotalAmountByServiceName();
+
+        return results.stream()
+                .map(result -> Map.of(
+                        "label", result[0],
+                        "value", result[1]
+                ))
+                .collect(Collectors.toList());
     }
 }

@@ -4,6 +4,7 @@ import com.subscriptionmanager.dto.SubscriptionDTO;
 import com.subscriptionmanager.entity.Subscription;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SubscriptionService {
     Subscription create(SubscriptionDTO subscriptionDTO);
@@ -13,4 +14,5 @@ public interface SubscriptionService {
     List<Subscription> getByUserId(Long userId);
     List<Subscription> getByCategoryId(Long categoryId);
     Subscription getById(Long subscriptionId);
+    List<Map<String, Object>> getTotalAmountByServiceName();
 }

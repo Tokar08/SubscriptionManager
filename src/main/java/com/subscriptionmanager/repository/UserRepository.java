@@ -9,7 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-
     @Query("SELECT u FROM User u WHERE u.id = :id AND u.isActive = true")
     Optional<User> findActiveById(Long id);
 
