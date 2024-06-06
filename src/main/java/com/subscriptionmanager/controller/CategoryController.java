@@ -6,32 +6,34 @@ import com.subscriptionmanager.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("categories")
 @RequiredArgsConstructor
 public class CategoryController {
-    @Autowired
-    private CategoryService categoryService;
+
+    private final CategoryService categoryService;
 
     @PostMapping
-    public ResponseEntity<Category> create(@RequestBody CategoryDTO categoryDTO) {
-        Category category = categoryService.create(categoryDTO);
+    public ResponseEntity<Category> create(@AuthenticationPrincipal Jwt jwt, @RequestBody CategoryDTO categoryDTO) {
+        Category category = categoryService.create(jwt, categoryDTO);
         return ResponseEntity.ok(category);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Category> update(@PathVariable Long id, @RequestBody CategoryDTO categoryDTO) {
+    public ResponseEntity<Category> update(@PathVariable("id") UUID id, @RequestBody CategoryDTO categoryDTO) {
         Category category = categoryService.update(id, categoryDTO);
         return ResponseEntity.ok(category);
     }
 
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") UUID id) {
         categoryService.delete(id);
         return ResponseEntity.noContent().build();
     }
@@ -43,14 +45,14 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Category> getById(@PathVariable Long id) {
+    public ResponseEntity<Category> getById(@PathVariable("id") UUID id) {
         Category category = categoryService.getById(id);
         return ResponseEntity.ok(category);
     }
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Category>> getByUserId(@PathVariable Long userId) {
-        List<Category> categories = categoryService.getByUserId(userId);
+    @GetMapping("/user")
+    public ResponseEntity<List<Category>> getByUserId(@AuthenticationPrincipal Jwt jwt) {
+        List<Category> categories = categoryService.getByUserId(jwt);
         return ResponseEntity.ok(categories);
     }
 }

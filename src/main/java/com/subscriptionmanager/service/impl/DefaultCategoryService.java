@@ -2,50 +2,42 @@ package com.subscriptionmanager.service.impl;
 
 import com.subscriptionmanager.dto.CategoryDTO;
 import com.subscriptionmanager.entity.Category;
-import com.subscriptionmanager.entity.User;
 import com.subscriptionmanager.exception.EntityNotFoundException;
 import com.subscriptionmanager.repository.CategoryRepository;
-import com.subscriptionmanager.repository.UserRepository;
 import com.subscriptionmanager.service.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class DefaultCategoryService implements CategoryService {
     private final CategoryRepository categoryRepository;
-    private final UserRepository userRepository;
 
     @Override
-    public Category create(CategoryDTO categoryDTO) {
-        Long userId = categoryDTO.getUserId();
-        User user = userRepository.findActiveById(userId)
-                .orElseThrow(() -> new EntityNotFoundException("User", "id", userId));
-
+    public Category create(Jwt jwt, CategoryDTO categoryDTO) {
         Category category = new Category();
-        category.setUser(user);
+        category.setUserId(UUID.fromString(jwt.getSubject()));
         category.setCategoryName(categoryDTO.getCategoryName());
         return categoryRepository.save(category);
     }
 
     @Override
-    public Category update(Long categoryId, CategoryDTO categoryDTO) {
+    public Category update(UUID categoryId, CategoryDTO categoryDTO) {
         Category category = categoryRepository.findActiveById(categoryId)
                 .orElseThrow(() -> new EntityNotFoundException("Category", "id", categoryId));
 
-        User user = userRepository.findActiveById(categoryDTO.getUserId())
-                .orElseThrow(() -> new EntityNotFoundException("User", "id", categoryDTO.getUserId()));
-
         category.setCategoryName(categoryDTO.getCategoryName());
-        category.setUser(user);
+
         return categoryRepository.save(category);
     }
 
     @Override
-    public void delete(Long categoryId) {
+    public void delete(UUID categoryId) {
         Category category = categoryRepository.findActiveById(categoryId)
                 .orElseThrow(() -> new EntityNotFoundException("Category", "id", categoryId));
         category.setActive(false);
@@ -58,15 +50,15 @@ public class DefaultCategoryService implements CategoryService {
     }
 
     @Override
-    public List<Category> getByUserId(Long userId) {
+    public List<Category> getByUserId(Jwt jwt) {
         return categoryRepository.findAll().stream()
-                .filter(category -> category.isActive() && category.getUser().getUserId().equals(userId))
+                .filter(category -> category.isActive())
                 .collect(Collectors.toList());
     }
 
 
     @Override
-    public Category getById(Long categoryId) {
+    public Category getById(UUID categoryId) {
         return categoryRepository.findActiveById(categoryId)
                 .orElseThrow(() -> new EntityNotFoundException("Category", "id", categoryId));
     }

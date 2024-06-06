@@ -12,7 +12,6 @@ public class CategoryDTO {
     @Size(min = 1, max = 255, message = "Category name must be between 1 and 255 characters")
     private String categoryName;
 
-    @NotNull(message = "User id is required")
-    private Long userId;
+
 
 }

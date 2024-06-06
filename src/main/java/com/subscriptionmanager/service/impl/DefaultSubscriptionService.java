@@ -3,17 +3,17 @@ package com.subscriptionmanager.service.impl;
 import com.subscriptionmanager.dto.SubscriptionDTO;
 import com.subscriptionmanager.entity.Category;
 import com.subscriptionmanager.entity.Subscription;
-import com.subscriptionmanager.entity.User;
 import com.subscriptionmanager.exception.EntityNotFoundException;
 import com.subscriptionmanager.repository.CategoryRepository;
 import com.subscriptionmanager.repository.SubscriptionRepository;
-import com.subscriptionmanager.repository.UserRepository;
 import com.subscriptionmanager.service.SubscriptionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,20 +21,18 @@ import java.util.stream.Collectors;
 public class DefaultSubscriptionService implements SubscriptionService {
 
     private final SubscriptionRepository subscriptionRepository;
-    private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
 
     @Override
-    public Subscription create(SubscriptionDTO subscriptionDTO) {
-        User user = userRepository.findActiveById(subscriptionDTO.getUserId())
-                .orElseThrow(() -> new EntityNotFoundException("User", "id", subscriptionDTO.getUserId()));
+    public Subscription create(Jwt jwt,SubscriptionDTO subscriptionDTO) {
 
         Category category = categoryRepository.findActiveById(subscriptionDTO.getCategoryId())
                 .orElseThrow(() -> new EntityNotFoundException("Category", "id", subscriptionDTO.getCategoryId()));
 
         Subscription subscription = new Subscription();
-        subscription.setUser(user);
+        subscription.setUserId(UUID.fromString(jwt.getSubject()));
         subscription.setCategory(category);
+        subscription.setSubscriptionId(category.getCategoryId());
         subscription.setServiceName(subscriptionDTO.getServiceName());
         subscription.setNextPaymentDate(subscriptionDTO.getNextPaymentDate());
         subscription.setAmount(subscriptionDTO.getAmount());
@@ -43,17 +41,14 @@ public class DefaultSubscriptionService implements SubscriptionService {
     }
 
     @Override
-    public Subscription update(Long subscriptionId, SubscriptionDTO subscriptionDTO) {
+    public Subscription update(UUID subscriptionId, SubscriptionDTO subscriptionDTO) {
         Subscription subscription = subscriptionRepository.findActiveById(subscriptionId)
                 .orElseThrow(() -> new EntityNotFoundException("Subscription", "id", subscriptionId));
-
-        User user = userRepository.findActiveById(subscriptionDTO.getUserId())
-                .orElseThrow(() -> new EntityNotFoundException("User", "id", subscriptionDTO.getUserId()));
 
         Category category = categoryRepository.findActiveById(subscriptionDTO.getCategoryId())
                 .orElseThrow(() -> new EntityNotFoundException("Category", "id", subscriptionDTO.getCategoryId()));
 
-        subscription.setUser(user);
+
         subscription.setCategory(category);
         subscription.setServiceName(subscriptionDTO.getServiceName());
         subscription.setNextPaymentDate(subscriptionDTO.getNextPaymentDate());
@@ -63,7 +58,7 @@ public class DefaultSubscriptionService implements SubscriptionService {
     }
 
     @Override
-    public void delete(Long subscriptionId) {
+    public void delete(UUID subscriptionId) {
         Subscription subscription = subscriptionRepository.findActiveById(subscriptionId)
                 .orElseThrow(() -> new EntityNotFoundException("Subscription", "id", subscriptionId));
         subscription.setActive(false);
@@ -76,17 +71,17 @@ public class DefaultSubscriptionService implements SubscriptionService {
     }
 
     @Override
-    public List<Subscription> getByUserId(Long userId) {
-        return subscriptionRepository.findActiveByUserId(userId);
+    public List<Subscription> getByUserId(Jwt jwt) {
+        return subscriptionRepository.findActiveByUserId(UUID.fromString(jwt.getSubject()));
     }
 
     @Override
-    public List<Subscription> getByCategoryId(Long categoryId) {
+    public List<Subscription> getByCategoryId(UUID categoryId) {
         return subscriptionRepository.findActiveByCategoryId(categoryId);
     }
 
     @Override
-    public Subscription getById(Long subscriptionId) {
+    public Subscription getById(UUID subscriptionId) {
         return subscriptionRepository.findActiveById(subscriptionId)
                 .orElseThrow(() -> new EntityNotFoundException("Subscription", "id", subscriptionId));
     }

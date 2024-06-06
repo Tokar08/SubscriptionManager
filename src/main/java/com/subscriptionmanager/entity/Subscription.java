@@ -9,6 +9,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -16,13 +17,11 @@ import java.time.LocalDateTime;
 @ValidEntity
 public class Subscription {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "subscription_id")
-    private Long subscriptionId;
+    private UUID subscriptionId = UUID.randomUUID();
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @Column(name = "user_id", nullable = false)
+    private UUID userId;
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)

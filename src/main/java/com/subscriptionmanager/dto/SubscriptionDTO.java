@@ -7,15 +7,13 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 public class SubscriptionDTO {
 
-    @NotNull(message = "User id is required")
-    private Long userId;
-
     @NotNull(message = "Category id is required")
-    private Long categoryId;
+    private UUID categoryId;
 
     @NotBlank(message = "Service name is required")
     private String serviceName;
