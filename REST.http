@@ -28,7 +28,7 @@ Content-Type: application/json
 ### DELETE category
 DELETE http://localhost:7878/categories/4802476b-3a43-469d-8402-e4b361ffec51
 
-
+//------------------------------------------------------------------------------------
 
 
 
@@ -49,10 +49,10 @@ Content-Type: application/json
 
 {
   "serviceName": "Dota+",
-  "nextPaymentDate": "2024-07-24T00:00:00",
-  "amount": 125,
+  "nextPaymentDate": "2024-07-25T00:00:00",
+  "amount": 200,
   "currency": "USD",
-  "categoryId": "3ab672c0-9364-498c-9358-fb23a13f9a3a"
+  "categoryId": "7e0513b7-1e13-4c6e-a55e-0cb0d6a8e6d8"
 }
 ###
 //------------------------------------------------------------------------------------
@@ -71,5 +71,5 @@ Content-Type: application/json
 
 ###
 //------------------------------------------------------------------------------------
-### DELETE category
-DELETE http://localhost:7878/subscriptions/7e0513b7-1e13-4c6e-a55e-0cb0d6a8e6d8
+### GET total amount for each category
+GET http://localhost:7878/subscriptions/total-amounts
