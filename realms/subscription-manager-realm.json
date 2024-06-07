@@ -304,8 +304,26 @@
       "security-admin-console": [],
       "subscription-manager": [
         {
+          "id": "c9c0e72d-3a97-4ba7-bb2d-ef1c76904793",
+          "name": "Role",
+          "description": "",
+          "composite": false,
+          "clientRole": true,
+          "containerId": "661328a4-76e1-4ba4-b100-bb3985f57ce7",
+          "attributes": {}
+        },
+        {
           "id": "9b15d92e-f886-4e5d-91f2-c60db76f46f0",
           "name": "user",
+          "description": "",
+          "composite": false,
+          "clientRole": true,
+          "containerId": "661328a4-76e1-4ba4-b100-bb3985f57ce7",
+          "attributes": {}
+        },
+        {
+          "id": "769e60c1-3fc8-40c4-bc6e-febfb1222b11",
+          "name": "admin",
           "description": "",
           "composite": false,
           "clientRole": true,
@@ -783,7 +801,7 @@
     {
       "id": "661328a4-76e1-4ba4-b100-bb3985f57ce7",
       "clientId": "subscription-manager",
-      "name": "",
+      "name": "subscription-manager",
       "description": "",
       "rootUrl": "",
       "adminUrl": "",
@@ -793,10 +811,10 @@
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "/*"
+        "*"
       ],
       "webOrigins": [
-        "/*"
+        "*"
       ],
       "notBefore": 0,
       "bearerOnly": false,
@@ -810,6 +828,7 @@
       "protocol": "openid-connect",
       "attributes": {
         "oidc.ciba.grant.enabled": "false",
+        "display.on.consent.screen": "false",
         "oauth2.device.authorization.grant.enabled": "false",
         "backchannel.logout.session.required": "true",
         "backchannel.logout.revoke.offline.tokens": "false"
@@ -845,10 +864,10 @@
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
-        "/*"
+        "*"
       ],
       "webOrigins": [
-        "/*"
+        "*"
       ],
       "notBefore": 0,
       "bearerOnly": false,
@@ -862,9 +881,10 @@
       "protocol": "openid-connect",
       "attributes": {
         "oidc.ciba.grant.enabled": "false",
-        "oauth2.device.authorization.grant.enabled": "false",
-        "client.secret.creation.time": "1717669478",
+        "client.secret.creation.time": "1717756857",
         "backchannel.logout.session.required": "true",
+        "display.on.consent.screen": "false",
+        "oauth2.device.authorization.grant.enabled": "false",
         "backchannel.logout.revoke.offline.tokens": "false"
       },
       "authenticationFlowBindingOverrides": {},

@@ -11,17 +11,17 @@ Authorization: Bearer {{$auth.token("keycloak")}}
 Content-Type: application/json
 
 {
-  "categoryName": "Game Service"
+  "categoryName": "Test2"
 }
 ###
 //------------------------------------------------------------------------------------
 ### PUT category
-PUT http://localhost:7878/categories/9e26d6eb-9c24-4e01-bd76-24a311bb9cdd
+PUT http://localhost:7878/categories/b32076fc-62e0-4d93-adc2-9563149ae0ae
 Authorization: Bearer {{$auth.token("keycloak")}}
 Content-Type: application/json
 
 {
-  "categoryName": "Spotify Premium"
+  "categoryName": "CS Premium"
 }
 ###
 //------------------------------------------------------------------------------------
