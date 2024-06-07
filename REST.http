@@ -11,7 +11,7 @@ Authorization: Bearer {{$auth.token("keycloak")}}
 Content-Type: application/json
 
 {
-    "categoryName": "Music Services7"
+  "categoryName": "Game Service"
 }
 ###
 //------------------------------------------------------------------------------------
@@ -48,23 +48,23 @@ Authorization: Bearer {{$auth.token("keycloak")}}
 Content-Type: application/json
 
 {
-  "serviceName": "Dota+",
+  "serviceName": "Dota2+",
   "nextPaymentDate": "2024-07-25T00:00:00",
   "amount": 200,
   "currency": "USD",
-  "categoryId": "7e0513b7-1e13-4c6e-a55e-0cb0d6a8e6d8"
+  "categoryId": "5d430db7-0c7e-461f-8991-97f5f24aef58"
 }
 ###
 //------------------------------------------------------------------------------------
 ### PUT subscription
-PUT http://localhost:7878/subscriptions/9e26d6eb-9c24-4e01-bd76-24a311bb9cdd
+PUT http://localhost:7878/subscriptions/5d430db7-0c7e-461f-8991-97f5f24aef58
 Authorization: Bearer {{$auth.token("keycloak")}}
 Content-Type: application/json
 
 {
-  "serviceName": "Telegram Premium",
+  "serviceName": "Dota+",
   "nextPaymentDate": "2024-07-24T00:00:00",
-  "amount": 125,
+  "amount": 300,
   "currency": "USD",
   "categoryId": "3ab672c0-9364-498c-9358-fb23a13f9a3a"
 }

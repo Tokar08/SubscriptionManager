@@ -24,7 +24,9 @@ public class KCRoleConverter implements Converter<Jwt, Collection<GrantedAuthori
     @Override
     public Collection<GrantedAuthority> convert(Jwt jwt) {
         Map<String, Object> resourceAccess = (Map<String, Object>) jwt.getClaims().get("resource_access");
-        Map<String, Object> clientAccess = resourceAccess != null ? (Map<String, Object>) resourceAccess.get(clientId) : null;
+        Map<String, Object> clientAccess = resourceAccess != null ?
+                (Map<String, Object>) resourceAccess.get(clientId)
+                : null;
 
         Collection<GrantedAuthority> returnValue = new ArrayList<>();
         List<?> roles = clientAccess != null ? (List<?>) clientAccess.get("roles") : null;

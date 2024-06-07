@@ -16,6 +16,6 @@ public interface CategoryRepository extends JpaRepository<Category, UUID> {
     @Query("SELECT c FROM Category c WHERE c.isActive = true")
     List<Category> findByIsActiveTrue();
 
-    @Query("SELECT c FROM Category c WHERE c.id = :id AND c.isActive = true")
+    @Query("SELECT c FROM Category c WHERE c.categoryId = :id AND c.isActive = true")
     Optional<Category> findActiveById(@Param("id") UUID id);
 }
