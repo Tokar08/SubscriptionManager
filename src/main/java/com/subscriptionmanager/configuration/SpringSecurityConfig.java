@@ -36,8 +36,8 @@ public class SpringSecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/categories").hasRole("admin")
-                        .requestMatchers(HttpMethod.PUT, "/categories/*").hasRole("admin")
-                        .requestMatchers(HttpMethod.DELETE, "/categories/*").hasRole("admin")
+                        .requestMatchers(HttpMethod.PUT, "/categories/**").hasRole("admin")
+                        .requestMatchers(HttpMethod.DELETE, "/categories/**").hasRole("admin")
                         .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
@@ -61,7 +61,4 @@ public class SpringSecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
 }
-
-
