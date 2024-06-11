@@ -19,20 +19,14 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class SubscriptionController {
 
-    @Autowired
-    private SubscriptionService subscriptionService;
-
-    @Autowired
-    public SubscriptionController(SubscriptionService subscriptionService) {
-        this.subscriptionService = subscriptionService;
-    }
+    private final SubscriptionService subscriptionService;
 
     @GetMapping
     public List<Subscription> getAll() {
         return subscriptionService.getAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id:\\d+}")
     public ResponseEntity<Subscription> getById(@PathVariable UUID id) {
         return ResponseEntity.ok(subscriptionService.getById(id));
     }
@@ -44,12 +38,12 @@ public class SubscriptionController {
         return ResponseEntity.ok(subscriptionService.create(jwt, subscriptionDTO));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id:\\d+}")
     public ResponseEntity<Subscription> update(@PathVariable UUID id, @RequestBody SubscriptionDTO subscriptionDTO) {
         return ResponseEntity.ok(subscriptionService.update(id, subscriptionDTO));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id:\\d+}")
     public ResponseEntity<?> delete(@PathVariable UUID id) {
         subscriptionService.delete(id);
         return ResponseEntity.noContent().build();

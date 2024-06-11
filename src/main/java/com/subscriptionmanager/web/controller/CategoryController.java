@@ -25,13 +25,13 @@ public class CategoryController {
         return ResponseEntity.ok(category);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id:\\d+}")
     public ResponseEntity<Category> update(@PathVariable("id") UUID id, @RequestBody CategoryDTO categoryDTO) {
         Category category = categoryService.update(id, categoryDTO);
         return ResponseEntity.ok(category);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id:\\d+}")
     public ResponseEntity<Void> delete(@PathVariable("id") UUID id) {
         categoryService.delete(id);
         return ResponseEntity.noContent().build();
@@ -43,7 +43,7 @@ public class CategoryController {
         return ResponseEntity.ok(categories);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id:\\d+}")
     public ResponseEntity<Category> getById(@PathVariable("id") UUID id) {
         Category category = categoryService.getById(id);
         return ResponseEntity.ok(category);
