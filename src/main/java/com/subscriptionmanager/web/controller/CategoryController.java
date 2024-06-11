@@ -1,10 +1,9 @@
-package com.subscriptionmanager.controller;
+package com.subscriptionmanager.web.controller;
 
-import com.subscriptionmanager.dto.CategoryDTO;
-import com.subscriptionmanager.entity.Category;
-import com.subscriptionmanager.service.CategoryService;
+import com.subscriptionmanager.domain.dto.CategoryDTO;
+import com.subscriptionmanager.domain.entity.Category;
+import com.subscriptionmanager.domain.service.CategoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;

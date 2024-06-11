@@ -1,10 +1,10 @@
-package com.subscriptionmanager.service.impl;
+package com.subscriptionmanager.domain.service.impl;
 
-import com.subscriptionmanager.dto.CategoryDTO;
-import com.subscriptionmanager.entity.Category;
-import com.subscriptionmanager.exception.EntityNotFoundException;
-import com.subscriptionmanager.repository.CategoryRepository;
-import com.subscriptionmanager.service.CategoryService;
+import com.subscriptionmanager.domain.dto.CategoryDTO;
+import com.subscriptionmanager.domain.entity.Category;
+import com.subscriptionmanager.domain.exception.EntityNotFoundException;
+import com.subscriptionmanager.domain.repository.CategoryRepository;
+import com.subscriptionmanager.domain.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;

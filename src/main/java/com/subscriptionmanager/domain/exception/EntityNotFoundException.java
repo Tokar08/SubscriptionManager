@@ -1,4 +1,4 @@
-package com.subscriptionmanager.exception;
+package com.subscriptionmanager.domain.exception;
 
 import lombok.Getter;
 

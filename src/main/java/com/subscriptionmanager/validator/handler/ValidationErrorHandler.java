@@ -1,6 +1,6 @@
 package com.subscriptionmanager.validator.handler;
 
-import com.subscriptionmanager.exception.EntityNotFoundException;
+import com.subscriptionmanager.domain.exception.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

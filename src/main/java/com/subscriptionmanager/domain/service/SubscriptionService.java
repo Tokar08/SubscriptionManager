@@ -1,7 +1,7 @@
-package com.subscriptionmanager.service;
+package com.subscriptionmanager.domain.service;
 
-import com.subscriptionmanager.dto.SubscriptionDTO;
-import com.subscriptionmanager.entity.Subscription;
+import com.subscriptionmanager.domain.dto.SubscriptionDTO;
+import com.subscriptionmanager.domain.entity.Subscription;
 import org.springframework.security.oauth2.jwt.Jwt;
 
 import java.util.List;

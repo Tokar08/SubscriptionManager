@@ -1,6 +1,6 @@
-package com.subscriptionmanager.repository;
+package com.subscriptionmanager.domain.repository;
 
-import com.subscriptionmanager.entity.Category;
+import com.subscriptionmanager.domain.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

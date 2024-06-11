@@ -1,15 +1,13 @@
-package com.subscriptionmanager.controller;
+package com.subscriptionmanager.web.controller;
 
-import com.subscriptionmanager.dto.SubscriptionDTO;
-import com.subscriptionmanager.entity.Subscription;
-import com.subscriptionmanager.service.SubscriptionService;
-import jakarta.validation.Valid;
+import com.subscriptionmanager.domain.dto.SubscriptionDTO;
+import com.subscriptionmanager.domain.entity.Subscription;
+import com.subscriptionmanager.domain.service.SubscriptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

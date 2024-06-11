@@ -1,4 +1,4 @@
-package com.subscriptionmanager.entity;
+package com.subscriptionmanager.domain.entity;
 
 import com.subscriptionmanager.validator.constraint.ValidEntity;
 import jakarta.persistence.*;

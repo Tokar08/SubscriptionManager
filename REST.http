@@ -11,7 +11,7 @@ Authorization: Bearer {{$auth.token("keycloak")}}
 Content-Type: application/json
 
 {
-  "categoryName": "Test2"
+  "categoryName": "Test3"
 }
 ###
 //------------------------------------------------------------------------------------
