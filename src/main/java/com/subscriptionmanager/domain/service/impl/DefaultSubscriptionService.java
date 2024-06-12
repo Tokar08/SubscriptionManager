@@ -3,7 +3,7 @@ package com.subscriptionmanager.domain.service.impl;
 import com.subscriptionmanager.domain.dto.SubscriptionDTO;
 import com.subscriptionmanager.domain.entity.Category;
 import com.subscriptionmanager.domain.entity.Subscription;
-import com.subscriptionmanager.domain.exception.DataEntityNotFoundException;
+import com.subscriptionmanager.exception.handler.DataEntityNotFoundException;
 import com.subscriptionmanager.domain.repository.CategoryRepository;
 import com.subscriptionmanager.domain.repository.SubscriptionRepository;
 import com.subscriptionmanager.domain.service.SubscriptionService;

@@ -2,7 +2,7 @@ package com.subscriptionmanager.domain.service.impl;
 
 import com.subscriptionmanager.domain.dto.CategoryDTO;
 import com.subscriptionmanager.domain.entity.Category;
-import com.subscriptionmanager.domain.exception.DataEntityNotFoundException;
+import com.subscriptionmanager.exception.handler.DataEntityNotFoundException;
 import com.subscriptionmanager.domain.repository.CategoryRepository;
 import com.subscriptionmanager.domain.service.CategoryService;
 import lombok.RequiredArgsConstructor;
