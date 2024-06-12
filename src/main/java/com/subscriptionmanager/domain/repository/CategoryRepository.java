@@ -18,4 +18,5 @@ public interface CategoryRepository extends JpaRepository<Category, UUID> {
 
     @Query("SELECT c FROM Category c WHERE c.categoryId = :id AND c.isActive = true")
     Optional<Category> findActiveById(@Param("id") UUID id);
+
 }

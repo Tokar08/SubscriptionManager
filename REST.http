@@ -1,22 +1,22 @@
 //====================================================================================
 ### GET categories
-GET http://localhost:7878/categories
+GET http://localhost:7878/api/v1/categories
 //------------------------------------------------------------------------------------
 ### GET categoriesById
-GET http://localhost:7878/categories/7e0513b7-1e13-4c6e-a55e-0cb0d6a8e6d8
+GET http://localhost:7878/api/v1/categories/7e0513b7-1e13-4c6e-a55e-0cb0d6a8e6d8
 //------------------------------------------------------------------------------------
 ### POST categories
-POST http://localhost:7878/categories
+POST http://localhost:7878/api/v1/categories
 Authorization: Bearer {{$auth.token("keycloak")}}
 Content-Type: application/json
 
 {
-  "categoryName": "Test3"
+  "categoryName": "TestUser!"
 }
 ###
 //------------------------------------------------------------------------------------
 ### PUT category
-PUT http://localhost:7878/categories/b32076fc-62e0-4d93-adc2-9563149ae0ae
+PUT http://localhost:7878/api/v1/categories/b643802b-eb13-4137-99ea-45356c2eba3d
 Authorization: Bearer {{$auth.token("keycloak")}}
 Content-Type: application/json
 
@@ -26,7 +26,7 @@ Content-Type: application/json
 ###
 //------------------------------------------------------------------------------------
 ### DELETE category
-DELETE http://localhost:7878/categories/4802476b-3a43-469d-8402-e4b361ffec51
+DELETE http://localhost:7878/api/v1/categories/b643802b-eb13-4137-99ea-45356c2eba3d
 
 //------------------------------------------------------------------------------------
 
@@ -36,33 +36,33 @@ DELETE http://localhost:7878/categories/4802476b-3a43-469d-8402-e4b361ffec51
 
 //====================================================================================
 ### GET subscriptions
-GET http://localhost:7878/subscriptions
+GET http://localhost:7878/api/v1/subscriptions
 
 //------------------------------------------------------------------------------------
 ### GET subscriptionsById
-GET http://localhost:7878/subscriptions/9e26d6eb-9c24-4e01-bd76-24a311bb9cdd
+GET http://localhost:7878/api/v1/subscriptions/9e26d6eb-9c24-4e01-bd76-24a311bb9cdd
 //------------------------------------------------------------------------------------
 ### POST subscription
-POST http://localhost:7878/subscriptions
-Authorization: Bearer {{$auth.token("keycloak")}}
-Content-Type: application/json
-
-{
-  "serviceName": "Dota2+",
-  "nextPaymentDate": "2024-07-25T00:00:00",
-  "amount": 200,
-  "currency": "USD",
-  "categoryId": "5d430db7-0c7e-461f-8991-97f5f24aef58"
-}
-###
-//------------------------------------------------------------------------------------
-### PUT subscription
-PUT http://localhost:7878/subscriptions/5d430db7-0c7e-461f-8991-97f5f24aef58
+POST http://localhost:7878/api/v1/subscriptions
 Authorization: Bearer {{$auth.token("keycloak")}}
 Content-Type: application/json
 
 {
   "serviceName": "Dota+",
+  "nextPaymentDate": "2024-07-25T00:00:00",
+  "amount": 200,
+  "currency": "USD",
+  "categoryId": "62b6bb1c-7289-4071-ae22-06244650df4f"
+}
+###
+//------------------------------------------------------------------------------------
+### PUT subscription
+PUT http://localhost:7878/api/v1/subscriptions/a6f48255-e73d-4fe9-94e1-4ddb3d52704c
+Authorization: Bearer {{$auth.token("keycloak")}}
+Content-Type: application/json
+
+{
+  "serviceName": "Dota10+",
   "nextPaymentDate": "2024-07-24T00:00:00",
   "amount": 300,
   "currency": "USD",
@@ -71,5 +71,9 @@ Content-Type: application/json
 
 ###
 //------------------------------------------------------------------------------------
+### DELETE category
+DELETE http://localhost:7878/api/v1/subscriptions/7e0513b7-1e13-4c6e-a55e-0cb0d6a8e6d8
+
+//------------------------------------------------------------------------------------
 ### GET total amount for each category
-GET http://localhost:7878/subscriptions/total-amounts
+GET http://localhost:7878/api/v1/subscriptions/total-amounts

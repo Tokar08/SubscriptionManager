@@ -12,6 +12,5 @@ public interface CategoryService {
     Category update(UUID categoryId, CategoryDTO categoryDTO);
     void delete(UUID categoryId);
     List<Category> getAll();
-    List<Category> getByUserId(Jwt jwt);
     Category getById(UUID categoryId);
 }

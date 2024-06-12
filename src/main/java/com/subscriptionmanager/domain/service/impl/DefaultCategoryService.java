@@ -50,14 +50,6 @@ public class DefaultCategoryService implements CategoryService {
     }
 
     @Override
-    public List<Category> getByUserId(Jwt jwt) {
-        return categoryRepository.findAll().stream()
-                .filter(category -> category.isActive())
-                .collect(Collectors.toList());
-    }
-
-
-    @Override
     public Category getById(UUID categoryId) {
         return categoryRepository.findActiveById(categoryId)
                 .orElseThrow(() -> new DataEntityNotFoundException("Category", "id", categoryId));

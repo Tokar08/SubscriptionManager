@@ -29,13 +29,14 @@ public class CategoryController {
         return ResponseEntity.ok(category);
     }
 
-    @PutMapping("/{id:\\d+}")
-    public ResponseEntity<Category> update(@PathVariable("id") UUID id,@Valid @RequestBody CategoryDTO categoryDTO) {
+    @PutMapping("/{id:[0-9a-fA-F\\-]+}")
+    public ResponseEntity<Category> update(@PathVariable("id") UUID id,
+                                           @Valid @RequestBody CategoryDTO categoryDTO) {
         Category category = categoryService.update(id, categoryDTO);
         return ResponseEntity.ok(category);
     }
 
-    @DeleteMapping("/{id:\\d+}")
+    @DeleteMapping("/{id:[0-9a-fA-F\\-]+}")
     public ResponseEntity<Void> delete(@PathVariable("id") UUID id) {
         categoryService.delete(id);
         return ResponseEntity.noContent().build();
@@ -47,15 +48,9 @@ public class CategoryController {
         return ResponseEntity.ok(categories);
     }
 
-    @GetMapping("/{id:\\d+}")
+    @GetMapping("/{id:[0-9a-fA-F\\-]+}")
     public ResponseEntity<Category> getById(@PathVariable("id") UUID id) {
         Category category = categoryService.getById(id);
         return ResponseEntity.ok(category);
-    }
-
-    @GetMapping("/user")
-    public ResponseEntity<List<Category>> getByUserId(@AuthenticationPrincipal Jwt jwt) {
-        List<Category> categories = categoryService.getByUserId(jwt);
-        return ResponseEntity.ok(categories);
     }
 }
