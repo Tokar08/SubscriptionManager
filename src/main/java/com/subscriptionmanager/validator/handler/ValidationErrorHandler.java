@@ -1,6 +1,6 @@
 package com.subscriptionmanager.validator.handler;
 
-import com.subscriptionmanager.domain.exception.EntityNotFoundException;
+import com.subscriptionmanager.domain.exception.DataEntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +16,8 @@ public class ValidationErrorHandler {
         return ResponseEntity.badRequest().body(ex.getBindingResult().getFieldError().getDefaultMessage());
     }
 
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<String> handleEntityNotFound(EntityNotFoundException ex) {
+    @ExceptionHandler(DataEntityNotFoundException.class)
+    public ResponseEntity<String> handleEntityNotFound(DataEntityNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 

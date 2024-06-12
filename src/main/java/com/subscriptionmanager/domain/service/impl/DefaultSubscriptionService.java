@@ -3,7 +3,7 @@ package com.subscriptionmanager.domain.service.impl;
 import com.subscriptionmanager.domain.dto.SubscriptionDTO;
 import com.subscriptionmanager.domain.entity.Category;
 import com.subscriptionmanager.domain.entity.Subscription;
-import com.subscriptionmanager.domain.exception.EntityNotFoundException;
+import com.subscriptionmanager.domain.exception.DataEntityNotFoundException;
 import com.subscriptionmanager.domain.repository.CategoryRepository;
 import com.subscriptionmanager.domain.repository.SubscriptionRepository;
 import com.subscriptionmanager.domain.service.SubscriptionService;
@@ -27,7 +27,7 @@ public class DefaultSubscriptionService implements SubscriptionService {
     public Subscription create(Jwt jwt,SubscriptionDTO subscriptionDTO) {
 
         Category category = categoryRepository.findActiveById(subscriptionDTO.getCategoryId())
-                .orElseThrow(() -> new EntityNotFoundException("Category", "id", subscriptionDTO.getCategoryId()));
+                .orElseThrow(() -> new DataEntityNotFoundException("Category", "id", subscriptionDTO.getCategoryId()));
 
         Subscription subscription = new Subscription();
         subscription.setUserId(UUID.fromString(jwt.getSubject()));
@@ -43,10 +43,10 @@ public class DefaultSubscriptionService implements SubscriptionService {
     @Override
     public Subscription update(UUID subscriptionId, SubscriptionDTO subscriptionDTO) {
         Subscription subscription = subscriptionRepository.findActiveById(subscriptionId)
-                .orElseThrow(() -> new EntityNotFoundException("Subscription", "id", subscriptionId));
+                .orElseThrow(() -> new DataEntityNotFoundException("Subscription", "id", subscriptionId));
 
         Category category = categoryRepository.findActiveById(subscriptionDTO.getCategoryId())
-                .orElseThrow(() -> new EntityNotFoundException("Category", "id", subscriptionDTO.getCategoryId()));
+                .orElseThrow(() -> new DataEntityNotFoundException("Category", "id", subscriptionDTO.getCategoryId()));
 
 
         subscription.setCategory(category);
@@ -60,7 +60,7 @@ public class DefaultSubscriptionService implements SubscriptionService {
     @Override
     public void delete(UUID subscriptionId) {
         Subscription subscription = subscriptionRepository.findActiveById(subscriptionId)
-                .orElseThrow(() -> new EntityNotFoundException("Subscription", "id", subscriptionId));
+                .orElseThrow(() -> new DataEntityNotFoundException("Subscription", "id", subscriptionId));
         subscription.setActive(false);
         subscriptionRepository.save(subscription);
     }
@@ -83,7 +83,7 @@ public class DefaultSubscriptionService implements SubscriptionService {
     @Override
     public Subscription getById(UUID subscriptionId) {
         return subscriptionRepository.findActiveById(subscriptionId)
-                .orElseThrow(() -> new EntityNotFoundException("Subscription", "id", subscriptionId));
+                .orElseThrow(() -> new DataEntityNotFoundException("Subscription", "id", subscriptionId));
     }
     @Override
     public List<Map<String, Object>> getTotalAmountByServiceName() {

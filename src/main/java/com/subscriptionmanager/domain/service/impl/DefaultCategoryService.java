@@ -2,7 +2,7 @@ package com.subscriptionmanager.domain.service.impl;
 
 import com.subscriptionmanager.domain.dto.CategoryDTO;
 import com.subscriptionmanager.domain.entity.Category;
-import com.subscriptionmanager.domain.exception.EntityNotFoundException;
+import com.subscriptionmanager.domain.exception.DataEntityNotFoundException;
 import com.subscriptionmanager.domain.repository.CategoryRepository;
 import com.subscriptionmanager.domain.service.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ public class DefaultCategoryService implements CategoryService {
     @Override
     public Category update(UUID categoryId, CategoryDTO categoryDTO) {
         Category category = categoryRepository.findActiveById(categoryId)
-                .orElseThrow(() -> new EntityNotFoundException("Category", "id", categoryId));
+                .orElseThrow(() -> new DataEntityNotFoundException("Category", "id", categoryId));
 
         category.setCategoryName(categoryDTO.getCategoryName());
 
@@ -39,7 +39,7 @@ public class DefaultCategoryService implements CategoryService {
     @Override
     public void delete(UUID categoryId) {
         Category category = categoryRepository.findActiveById(categoryId)
-                .orElseThrow(() -> new EntityNotFoundException("Category", "id", categoryId));
+                .orElseThrow(() -> new DataEntityNotFoundException("Category", "id", categoryId));
         category.setActive(false);
         categoryRepository.save(category);
     }
@@ -60,6 +60,6 @@ public class DefaultCategoryService implements CategoryService {
     @Override
     public Category getById(UUID categoryId) {
         return categoryRepository.findActiveById(categoryId)
-                .orElseThrow(() -> new EntityNotFoundException("Category", "id", categoryId));
+                .orElseThrow(() -> new DataEntityNotFoundException("Category", "id", categoryId));
     }
 }
