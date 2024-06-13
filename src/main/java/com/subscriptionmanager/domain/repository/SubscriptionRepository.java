@@ -3,6 +3,7 @@ package com.subscriptionmanager.domain.repository;
 import com.subscriptionmanager.domain.entity.Subscription;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,6 +24,9 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, UUID
 
     @Query("SELECT s FROM Subscription s WHERE s.category.categoryId = :categoryId AND s.isActive = true")
     List<Subscription> findActiveByCategoryId(UUID categoryId);
+
+    @Query("SELECT s FROM Subscription s WHERE s.userId = :id AND s.isActive = true")
+    List<Subscription> getAllSubscriptionsByUserId(UUID id);
 
     @Query("SELECT s.serviceName, SUM(s.amount) FROM Subscription s WHERE s.isActive = true GROUP BY s.serviceName")
     List<Object[]> findTotalAmountByServiceName();

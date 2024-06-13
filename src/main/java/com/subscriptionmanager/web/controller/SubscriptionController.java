@@ -23,9 +23,15 @@ public class SubscriptionController {
 
     private final SubscriptionService subscriptionService;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Subscription> getAll() {
         return subscriptionService.getAll();
+    }
+
+    @GetMapping
+    public List<Subscription> getAllSubscriptionsByUserId(@AuthenticationPrincipal Jwt jwt)
+    {
+        return subscriptionService.getAllSubscriptionsByUserId(jwt);
     }
 
     @GetMapping("/{id:[0-9a-fA-F\\-]+}")

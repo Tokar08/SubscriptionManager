@@ -1,5 +1,6 @@
 package com.subscriptionmanager.domain.service.impl;
 
+import com.nimbusds.jwt.JWT;
 import com.subscriptionmanager.domain.dto.SubscriptionDTO;
 import com.subscriptionmanager.domain.entity.Category;
 import com.subscriptionmanager.domain.entity.Subscription;
@@ -73,6 +74,11 @@ public class DefaultSubscriptionService implements SubscriptionService {
     @Override
     public List<Subscription> getByUserId(Jwt jwt) {
         return subscriptionRepository.findActiveByUserId(UUID.fromString(jwt.getSubject()));
+    }
+
+    @Override
+    public List<Subscription> getAllSubscriptionsByUserId(Jwt jwt) {
+        return subscriptionRepository.getAllSubscriptionsByUserId(UUID.fromString(jwt.getSubject()));
     }
 
     @Override

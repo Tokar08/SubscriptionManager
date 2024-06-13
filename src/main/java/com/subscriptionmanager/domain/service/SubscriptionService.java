@@ -14,6 +14,7 @@ public interface SubscriptionService {
     void delete(UUID subscriptionId);
     List<Subscription> getAll();
     List<Subscription> getByUserId(Jwt jwt);
+    List<Subscription> getAllSubscriptionsByUserId(Jwt jwt);
     List<Subscription> getByCategoryId(UUID categoryId);
     Subscription getById(UUID subscriptionId);
     List<Map<String, Object>> getTotalAmountByServiceName();

@@ -35,9 +35,10 @@ public class SpringSecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/categories").hasRole("admin")
-                        .requestMatchers(HttpMethod.PUT, "/categories/**").hasRole("admin")
-                        .requestMatchers(HttpMethod.DELETE, "/categories/**").hasRole("admin")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/categories").hasRole("admin")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/categories/**").hasRole("admin")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/categories/**").hasRole("admin")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/subscriptions/all").hasRole("admin")
                         .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
