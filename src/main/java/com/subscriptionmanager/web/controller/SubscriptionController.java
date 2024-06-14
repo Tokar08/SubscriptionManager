@@ -3,8 +3,10 @@ package com.subscriptionmanager.web.controller;
 import com.subscriptionmanager.domain.dto.SubscriptionDTO;
 import com.subscriptionmanager.domain.entity.Subscription;
 import com.subscriptionmanager.domain.service.SubscriptionService;
+import com.subscriptionmanager.domain.mapper.SubscriptionMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -22,6 +24,7 @@ import java.util.UUID;
 public class SubscriptionController {
 
     private final SubscriptionService subscriptionService;
+    private final SubscriptionMapper subscriptionMapper;
 
     @GetMapping("/all")
     public List<Subscription> getAll() {
@@ -40,16 +43,19 @@ public class SubscriptionController {
     }
 
     @PostMapping
-    public ResponseEntity<Subscription> create(
+    public ResponseEntity<SubscriptionDTO> create(
             @AuthenticationPrincipal Jwt jwt,
             @Valid @RequestBody SubscriptionDTO subscriptionDTO) {
-        return ResponseEntity.ok(subscriptionService.create(jwt, subscriptionDTO));
+
+        Subscription subscription = subscriptionService.create(jwt, subscriptionDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(SubscriptionMapper.INSTANCE.toDTO(subscription));
     }
 
     @PutMapping("/{id:[0-9a-fA-F\\-]+}")
-    public ResponseEntity<Subscription> update(@PathVariable UUID id,
-                                               @Valid @RequestBody SubscriptionDTO subscriptionDTO) {
-        return ResponseEntity.ok(subscriptionService.update(id, subscriptionDTO));
+    public ResponseEntity<SubscriptionDTO> update(@PathVariable UUID id,
+                                                  @Valid @RequestBody SubscriptionDTO subscriptionDTO) {
+        Subscription subscription = subscriptionService.update(id, subscriptionDTO);
+        return ResponseEntity.ok(subscriptionMapper.toDTO(subscription));
     }
 
     @DeleteMapping("/{id:[0-9a-fA-F\\-]+}")

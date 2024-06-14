@@ -4,6 +4,7 @@ import com.nimbusds.jwt.JWT;
 import com.subscriptionmanager.domain.dto.SubscriptionDTO;
 import com.subscriptionmanager.domain.entity.Category;
 import com.subscriptionmanager.domain.entity.Subscription;
+import com.subscriptionmanager.domain.mapper.SubscriptionMapper;
 import com.subscriptionmanager.exception.handler.DataEntityNotFoundException;
 import com.subscriptionmanager.domain.repository.CategoryRepository;
 import com.subscriptionmanager.domain.repository.SubscriptionRepository;
@@ -23,21 +24,17 @@ public class DefaultSubscriptionService implements SubscriptionService {
 
     private final SubscriptionRepository subscriptionRepository;
     private final CategoryRepository categoryRepository;
+    private final SubscriptionMapper subscriptionMapper;
 
     @Override
-    public Subscription create(Jwt jwt,SubscriptionDTO subscriptionDTO) {
+    public Subscription create(Jwt jwt, SubscriptionDTO subscriptionDTO) {
+        Subscription subscription = subscriptionMapper.toEntity(subscriptionDTO);
 
-        Category category = categoryRepository.findActiveById(subscriptionDTO.getCategoryId())
-                .orElseThrow(() -> new DataEntityNotFoundException("Category", "id", subscriptionDTO.getCategoryId()));
-
-        Subscription subscription = new Subscription();
         subscription.setUserId(UUID.fromString(jwt.getSubject()));
+        Category category = categoryRepository.findById(subscriptionDTO.getCategoryId())
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+
         subscription.setCategory(category);
-        subscription.setSubscriptionId(category.getCategoryId());
-        subscription.setServiceName(subscriptionDTO.getServiceName());
-        subscription.setNextPaymentDate(subscriptionDTO.getNextPaymentDate());
-        subscription.setAmount(subscriptionDTO.getAmount());
-        subscription.setCurrency(subscriptionDTO.getCurrency());
         return subscriptionRepository.save(subscription);
     }
 
@@ -46,15 +43,13 @@ public class DefaultSubscriptionService implements SubscriptionService {
         Subscription subscription = subscriptionRepository.findActiveById(subscriptionId)
                 .orElseThrow(() -> new DataEntityNotFoundException("Subscription", "id", subscriptionId));
 
-        Category category = categoryRepository.findActiveById(subscriptionDTO.getCategoryId())
-                .orElseThrow(() -> new DataEntityNotFoundException("Category", "id", subscriptionDTO.getCategoryId()));
-
+        Category category = categoryRepository.findById(subscriptionDTO.getCategoryId())
+                .orElseThrow(() -> new RuntimeException("Category not found"));
 
         subscription.setCategory(category);
-        subscription.setServiceName(subscriptionDTO.getServiceName());
-        subscription.setNextPaymentDate(subscriptionDTO.getNextPaymentDate());
-        subscription.setAmount(subscriptionDTO.getAmount());
-        subscription.setCurrency(subscriptionDTO.getCurrency());
+
+        subscriptionMapper.updateFromDTO(subscriptionDTO, subscription);
+
         return subscriptionRepository.save(subscription);
     }
 
@@ -91,6 +86,7 @@ public class DefaultSubscriptionService implements SubscriptionService {
         return subscriptionRepository.findActiveById(subscriptionId)
                 .orElseThrow(() -> new DataEntityNotFoundException("Subscription", "id", subscriptionId));
     }
+
     @Override
     public List<Map<String, Object>> getTotalAmountByServiceName() {
         List<Object[]> results = subscriptionRepository.findTotalAmountByServiceName();

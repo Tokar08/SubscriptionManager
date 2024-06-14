@@ -3,8 +3,10 @@ package com.subscriptionmanager.web.controller;
 import com.subscriptionmanager.domain.dto.CategoryDTO;
 import com.subscriptionmanager.domain.entity.Category;
 import com.subscriptionmanager.domain.service.CategoryService;
+import com.subscriptionmanager.domain.mapper.CategoryMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -21,19 +23,20 @@ import java.util.UUID;
 public class CategoryController {
 
     private final CategoryService categoryService;
+    private final CategoryMapper categoryMapper;
 
     @PostMapping
-    public ResponseEntity<Category> create(@AuthenticationPrincipal Jwt jwt,
+    public ResponseEntity<CategoryDTO> create(@AuthenticationPrincipal Jwt jwt,
                                            @Valid @RequestBody CategoryDTO categoryDTO) {
         Category category = categoryService.create(jwt, categoryDTO);
-        return ResponseEntity.ok(category);
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryMapper.toDTO(category));
     }
 
     @PutMapping("/{id:[0-9a-fA-F\\-]+}")
-    public ResponseEntity<Category> update(@PathVariable("id") UUID id,
+    public ResponseEntity<CategoryDTO> update(@PathVariable("id") UUID id,
                                            @Valid @RequestBody CategoryDTO categoryDTO) {
         Category category = categoryService.update(id, categoryDTO);
-        return ResponseEntity.ok(category);
+        return ResponseEntity.ok(categoryMapper.toDTO(category));
     }
 
     @DeleteMapping("/{id:[0-9a-fA-F\\-]+}")

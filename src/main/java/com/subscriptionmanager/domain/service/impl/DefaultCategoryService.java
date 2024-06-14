@@ -2,6 +2,7 @@ package com.subscriptionmanager.domain.service.impl;
 
 import com.subscriptionmanager.domain.dto.CategoryDTO;
 import com.subscriptionmanager.domain.entity.Category;
+import com.subscriptionmanager.domain.mapper.CategoryMapper;
 import com.subscriptionmanager.exception.handler.DataEntityNotFoundException;
 import com.subscriptionmanager.domain.repository.CategoryRepository;
 import com.subscriptionmanager.domain.service.CategoryService;
@@ -17,12 +18,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class DefaultCategoryService implements CategoryService {
     private final CategoryRepository categoryRepository;
+    private final CategoryMapper categoryMapper;
 
     @Override
     public Category create(Jwt jwt, CategoryDTO categoryDTO) {
-        Category category = new Category();
+        Category category = categoryMapper.toEntity(categoryDTO);
         category.setUserId(UUID.fromString(jwt.getSubject()));
-        category.setCategoryName(categoryDTO.getCategoryName());
         return categoryRepository.save(category);
     }
 
@@ -31,7 +32,7 @@ public class DefaultCategoryService implements CategoryService {
         Category category = categoryRepository.findActiveById(categoryId)
                 .orElseThrow(() -> new DataEntityNotFoundException("Category", "id", categoryId));
 
-        category.setCategoryName(categoryDTO.getCategoryName());
+        categoryMapper.updateFromDTO(categoryDTO, category);
 
         return categoryRepository.save(category);
     }
