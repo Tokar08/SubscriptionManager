@@ -5,12 +5,9 @@ import com.subscriptionmanager.domain.entity.Subscription;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public interface SubscriptionMapper {
-
-    SubscriptionMapper INSTANCE = Mappers.getMapper(SubscriptionMapper.class);
 
     @Mapping(source = "category.categoryId", target = "categoryId")
     SubscriptionDTO toDTO(Subscription entity);

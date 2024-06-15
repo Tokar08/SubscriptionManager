@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -33,7 +32,6 @@ public class DefaultCategoryService implements CategoryService {
                 .orElseThrow(() -> new DataEntityNotFoundException("Category", "id", categoryId));
 
         categoryMapper.updateFromDTO(categoryDTO, category);
-
         return categoryRepository.save(category);
     }
 

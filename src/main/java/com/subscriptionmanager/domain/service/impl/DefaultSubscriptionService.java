@@ -1,6 +1,5 @@
 package com.subscriptionmanager.domain.service.impl;
 
-import com.nimbusds.jwt.JWT;
 import com.subscriptionmanager.domain.dto.SubscriptionDTO;
 import com.subscriptionmanager.domain.entity.Category;
 import com.subscriptionmanager.domain.entity.Subscription;

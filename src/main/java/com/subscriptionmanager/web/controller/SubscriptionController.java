@@ -48,7 +48,7 @@ public class SubscriptionController {
             @Valid @RequestBody SubscriptionDTO subscriptionDTO) {
 
         Subscription subscription = subscriptionService.create(jwt, subscriptionDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(SubscriptionMapper.INSTANCE.toDTO(subscription));
+        return ResponseEntity.status(HttpStatus.CREATED).body(subscriptionMapper.toDTO(subscription));
     }
 
     @PutMapping("/{id:[0-9a-fA-F\\-]+}")
