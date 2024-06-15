@@ -1,6 +1,6 @@
 package com.subscriptionmanager.domain.service.impl;
 
-import com.subscriptionmanager.domain.dto.SubscriptionDTO;
+import com.subscriptionmanager.web.dto.SubscriptionDTO;
 import com.subscriptionmanager.domain.entity.Category;
 import com.subscriptionmanager.domain.entity.Subscription;
 import com.subscriptionmanager.domain.mapper.SubscriptionMapper;

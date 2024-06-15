@@ -1,6 +1,6 @@
 package com.subscriptionmanager.web.controller;
 
-import com.subscriptionmanager.domain.dto.SubscriptionDTO;
+import com.subscriptionmanager.web.dto.SubscriptionDTO;
 import com.subscriptionmanager.domain.entity.Subscription;
 import com.subscriptionmanager.domain.service.SubscriptionService;
 import com.subscriptionmanager.domain.mapper.SubscriptionMapper;

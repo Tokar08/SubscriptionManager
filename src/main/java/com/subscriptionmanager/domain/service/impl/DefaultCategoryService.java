@@ -1,6 +1,6 @@
 package com.subscriptionmanager.domain.service.impl;
 
-import com.subscriptionmanager.domain.dto.CategoryDTO;
+import com.subscriptionmanager.web.dto.CategoryDTO;
 import com.subscriptionmanager.domain.entity.Category;
 import com.subscriptionmanager.domain.mapper.CategoryMapper;
 import com.subscriptionmanager.exception.handler.DataEntityNotFoundException;

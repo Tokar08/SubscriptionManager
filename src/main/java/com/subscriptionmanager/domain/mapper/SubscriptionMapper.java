@@ -1,6 +1,6 @@
 package com.subscriptionmanager.domain.mapper;
 
-import com.subscriptionmanager.domain.dto.SubscriptionDTO;
+import com.subscriptionmanager.web.dto.SubscriptionDTO;
 import com.subscriptionmanager.domain.entity.Subscription;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

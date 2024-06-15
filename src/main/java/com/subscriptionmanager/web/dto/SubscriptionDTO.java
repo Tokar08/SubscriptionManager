@@ -1,4 +1,4 @@
-package com.subscriptionmanager.domain.dto;
+package com.subscriptionmanager.web.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
