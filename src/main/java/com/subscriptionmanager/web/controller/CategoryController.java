@@ -47,6 +47,7 @@ public class CategoryController {
 
     @GetMapping
     public ResponseEntity<List<Category>> getAll() {
+        //Тут лучше коллектором или и лучше с репозитория использовать?
         List<Category> categories = categoryService.getAll();
         return ResponseEntity.ok(categories);
     }

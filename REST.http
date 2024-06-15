@@ -11,22 +11,22 @@ Authorization: Bearer {{$auth.token("keycloak")}}
 Content-Type: application/json
 
 {
-  "categoryName": "TestUser3!"
+  "categoryName": "Music123"
 }
 ###
 //------------------------------------------------------------------------------------
 ### PUT category
-PUT http://localhost:7878/api/v1/categories/9637be53-789b-4e0c-baca-ea7fb6244241
+PUT http://localhost:7878/api/v1/categories/a0b262a2-3a20-4aa2-a887-c19027784033
 Authorization: Bearer {{$auth.token("keycloak")}}
 Content-Type: application/json
 
 {
-  "categoryName": "CS Premium"
+  "categoryName": "Game"
 }
 ###
 //------------------------------------------------------------------------------------
 ### DELETE category
-DELETE http://localhost:7878/api/v1/categories/37ad0fc1-43d6-4e9d-b412-868a16a3c96e
+DELETE http://localhost:7878/api/v1/categories/e4cab9b9-65d9-4be7-b792-9edbd4079315
 Authorization: Bearer {{$auth.token("keycloak")}}
 
 //------------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ GET http://localhost:7878/api/v1/subscriptions/all
 Authorization: Bearer {{$auth.token("keycloak")}}
 //------------------------------------------------------------------------------------
 ### GET subscriptionsById
-GET http://localhost:7878/api/v1/subscriptions/9e26d6eb-9c24-4e01-bd76-24a311bb9cdd
+GET http://localhost:7878/api/v1/subscriptions/1007943a-deed-4331-a22a-21fe0fb0d32f
 
 //------------------------------------------------------------------------------------
 ### GET subscriptionsUsersById
@@ -55,31 +55,31 @@ Authorization: Bearer {{$auth.token("keycloak")}}
 Content-Type: application/json
 
 {
-  "serviceName": "Dota4+",
+  "serviceName": "Dota2+",
   "nextPaymentDate": "2024-07-25T00:00:00",
-  "amount": 500,
+  "amount": 5,
   "currency": "USD",
-  "categoryId": "9637be53-789b-4e0c-baca-ea7fb6244241"
+  "categoryId": "a0b262a2-3a20-4aa2-a887-c19027784033"
 }
 ###
 //------------------------------------------------------------------------------------
 ### PUT subscription
-PUT http://localhost:7878/api/v1/subscriptions/9596c308-857a-425a-9e20-1527820bd09e
+PUT http://localhost:7878/api/v1/subscriptions/682ac8ce-4d60-4f18-b5d6-148022d4d271
 Authorization: Bearer {{$auth.token("keycloak")}}
 Content-Type: application/json
 
 {
-  "serviceName": "Dota2+",
+  "serviceName": "Dota+",
   "nextPaymentDate": "2024-07-24T00:00:00",
   "amount": 500,
   "currency": "USD",
-  "categoryId": "9637be53-789b-4e0c-baca-ea7fb6244241"
+  "categoryId": "a0b262a2-3a20-4aa2-a887-c19027784033"
 }
 
 ###
 //------------------------------------------------------------------------------------
 ### DELETE category
-DELETE http://localhost:7878/api/v1/subscriptions/92d26e69-5bcc-450f-8f3c-8ab5b48d2f83
+DELETE http://localhost:7878/api/v1/subscriptions/682ac8ce-4d60-4f18-b5d6-148022d4d271
 
 //------------------------------------------------------------------------------------
 ### GET total amount for each category

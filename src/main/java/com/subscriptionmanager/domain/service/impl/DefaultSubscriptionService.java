@@ -67,11 +67,6 @@ public class DefaultSubscriptionService implements SubscriptionService {
     }
 
     @Override
-    public List<Subscription> getByUserId(Jwt jwt) {
-        return subscriptionRepository.findActiveByUserId(UUID.fromString(jwt.getSubject()));
-    }
-
-    @Override
     public List<Subscription> getAllSubscriptionsByUserId(Jwt jwt) {
         return subscriptionRepository.getAllSubscriptionsByUserId(UUID.fromString(jwt.getSubject()));
     }

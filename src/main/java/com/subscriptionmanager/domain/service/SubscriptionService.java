@@ -13,7 +13,6 @@ public interface SubscriptionService {
     Subscription update(UUID subscriptionId, SubscriptionDTO subscriptionDTO);
     void delete(UUID subscriptionId);
     List<Subscription> getAll();
-    List<Subscription> getByUserId(Jwt jwt);
     List<Subscription> getAllSubscriptionsByUserId(Jwt jwt);
     List<Subscription> getByCategoryId(UUID categoryId);
     Subscription getById(UUID subscriptionId);
