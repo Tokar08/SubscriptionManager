@@ -87,7 +87,7 @@ public class DefaultSubscriptionService implements SubscriptionService {
 
         return results.stream()
                 .map(result -> Map.of(
-                        "label", result[0],
+                        "title", result[0],
                         "value", result[1]
                 ))
                 .collect(Collectors.toList());

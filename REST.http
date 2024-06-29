@@ -3,7 +3,7 @@
 GET http://localhost:7878/api/v1/categories
 //------------------------------------------------------------------------------------
 ### GET categoriesById
-GET http://localhost:7878/api/v1/categories/9637be53-789b-4e0c-baca-ea7fb6244241
+GET http://localhost:7878/api/v1/categories/ad1c8a8e-a415-49a5-b092-fcc6d94338cc
 //------------------------------------------------------------------------------------
 ### POST categories
 POST http://localhost:7878/api/v1/categories
@@ -11,7 +11,7 @@ Authorization: Bearer {{$auth.token("keycloak")}}
 Content-Type: application/json
 
 {
-  "categoryName": "Music123"
+  "categoryName": "Edu"
 }
 ###
 //------------------------------------------------------------------------------------
@@ -55,25 +55,25 @@ Authorization: Bearer {{$auth.token("keycloak")}}
 Content-Type: application/json
 
 {
-  "serviceName": "Dota2+",
+  "serviceName": "Dota",
   "nextPaymentDate": "2024-07-25T00:00:00",
   "amount": 5,
   "currency": "USD",
-  "categoryId": "a0b262a2-3a20-4aa2-a887-c19027784033"
+  "categoryId": "44be70b8-5599-42e9-ac4a-eadfd6ed70ce"
 }
 ###
 //------------------------------------------------------------------------------------
 ### PUT subscription
-PUT http://localhost:7878/api/v1/subscriptions/682ac8ce-4d60-4f18-b5d6-148022d4d271
+PUT http://localhost:7878/api/v1/subscriptions/baf36250-6817-4ff0-ae35-8e08aac44383
 Authorization: Bearer {{$auth.token("keycloak")}}
 Content-Type: application/json
 
 {
-  "serviceName": "Dota+",
+  "serviceName": "Spotify",
   "nextPaymentDate": "2024-07-24T00:00:00",
   "amount": 500,
   "currency": "USD",
-  "categoryId": "a0b262a2-3a20-4aa2-a887-c19027784033"
+  "categoryId": "ad1c8a8e-a415-49a5-b092-fcc6d94338cc"
 }
 
 ###
